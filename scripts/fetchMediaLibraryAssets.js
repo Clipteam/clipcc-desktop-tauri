@@ -9,7 +9,7 @@ const libraries = require('./lib/libraries');
 const ASSET_HOST = process.env.ASSET_HOST || 'cdn.assets.scratch.mit.edu';
 const ASSET_URL_FORMAT = process.env.ASSET_URL_FORMAT || 'https://[ASSET_HOST]/internalapi/asset/[MD5]/get/';
 const NUM_SIMULTANEOUS_DOWNLOADS = 64;
-const OUT_PATH = path.resolve('static', 'assets');
+const OUT_PATH = path.resolve(__dirname, '../src-tauri', 'assets');
 
 let proxy;
 
@@ -39,15 +39,15 @@ const axios = require('axios').default.create({
 });
 
 try {
-    fs.rmSync(path.resolve(__dirname, '../static/assets'), {recursive: true, force: true});
+    fs.rmSync(OUT_PATH, {recursive: true, force: true});
 } catch (err) {
     try {
-        fs.rmdirSync(path.resolve(__dirname, '../static/assets'), {recursive: true});
+        fs.rmdirSync(OUT_PATH, {recursive: true});
     } catch (_err) {
         // Ignore
     }
 }
-fs.mkdirSync(path.resolve(__dirname, '../static/assets'), {recursive: true});
+fs.mkdirSync(OUT_PATH, {recursive: true});
 
 const describe = function (object) {
     return util.inspect(object, false, 3, true);

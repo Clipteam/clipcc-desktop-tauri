@@ -101,12 +101,12 @@ module.exports = {
         }, {
             from: path.resolve(__dirname, 'src', 'index.css'),
             to: '.'
-        }].push(...[{
+        }, {
             from: path.resolve(getModulePath('clipcc-block'), 'media'),
             to: './static/blocks-media'
         }, {
             from: path.resolve(getModulePath('clipcc-gui'), 'static'),
             to: './static'
-        }]))
+        }])
     ]
 };

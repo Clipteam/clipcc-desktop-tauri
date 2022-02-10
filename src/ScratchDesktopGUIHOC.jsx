@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import {loadExtensionFromFile} from 'clipcc-gui/src';
+import TauriStorageHelper from './TauriStorageHelper';
 
 import {
     LoadingStates,
@@ -115,7 +116,7 @@ const ScratchDesktopGUIHOC = function (WrappedComponent) {
             // ipcRenderer.invoke('set-extension', this.props.extension);
         }
         handleStorageInit (storageInstance) {
-            // storageInstance.addHelper(new ElectronStorageHelper(storageInstance));
+            storageInstance.addHelper(new TauriStorageHelper(storageInstance));
         }
         handleUpdateProjectTitle (newTitle) {
             this.setState({projectTitle: newTitle});
