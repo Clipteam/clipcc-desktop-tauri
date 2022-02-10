@@ -1,0 +1,29 @@
+[package]
+name = "clipcc-desktop-tauri"
+version = "3.1.1"
+description = "ClipCC as a self-contained desktop application"
+authors = [ "Clip Team" ]
+license = "AGPL-3.0"
+repository = "https://github.com/Clipteam/clipcc-desktop-tauri.git"
+default-run = "clipcc-desktop-tauri"
+edition = "2018"
+build = "src/build.rs"
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+opt-level = "z"
+debug = false
+
+[build-dependencies]
+tauri-build = { version = "1.0.0-beta.4", features = [] }
+
+[dependencies]
+serde_json = "1.0"
+serde = { version = "1.0", features = [ "derive" ] }
+tauri = { version = "1.0.0-beta.8", features = ["api-all"] }
+
+[features]
+default = [ "custom-protocol" ]
+custom-protocol = [ "tauri/custom-protocol" ]

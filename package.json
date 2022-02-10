@@ -1,0 +1,62 @@
+{
+  "name": "clipcc-desktop-tauri",
+  "productName": "ClipCC",
+  "description": "ClipCC as a self-contained desktop application",
+  "author": {
+    "name": "Clip Team",
+    "email": "cuizhihui030925@outlook.com"
+  },
+  "version": "3.1.1",
+  "license": "AGPL-3.0",
+  "scripts": {
+    "tauri": "tauri",
+    "fetch": "node ./scripts/fetchMediaLibraryAssets.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Clipteam/clipcc-desktop-tauri.git"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-proposal-object-rest-spread": "^7.9.6",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-async-to-generator": "^7.8.3",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
+    "@tauri-apps/cli": "^1.0.0-beta.10",
+    "autoprefixer": "9.0.1",
+    "axios": "^0.25.0",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-react-intl": "^7.5.7",
+    "clean-webpack-plugin": "^4.0.0",
+    "clipcc-extension": "^0.1.7",
+    "copy-webpack-plugin": "^5.1.2",
+    "css-loader": "1.0.0",
+    "esbuild-loader": "^2.18.0",
+    "eslint": "^7.0.0",
+    "eslint-config-scratch": "^6.0.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-react": "^7.20.0",
+    "file-loader": "^6.2.0",
+    "jszip": "^3.6.0",
+    "lodash.omit": "^4.5.0",
+    "mime-types": "^2.1.31",
+    "postcss-import": "12.0.0",
+    "postcss-loader": "3.0.0",
+    "postcss-simple-vars": "5.0.1",
+    "react": "16.2.0",
+    "react-dom": "16.2.1",
+    "react-intl": "2.9.0",
+    "react-redux": "5.0.7",
+    "redux": "3.7.2",
+    "source-map-support": "^0.5.19",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^1.0.0-beta.8",
+    "clipcc-gui": "git+https://github.com/Clipteam/clipcc-gui.git#master"
+  }
+}
