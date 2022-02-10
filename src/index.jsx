@@ -7,6 +7,9 @@ window.require = function (moduleName) {
     if (moduleName in tauri) {
         return tauri[moduleName];
     }
+    if (moduleName === 'tauri') {
+        return tauri;
+    }
     throw new TypeError(`Cannot find module '${moduleName}'`);
 };
 
