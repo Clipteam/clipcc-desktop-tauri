@@ -1,5 +1,6 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const path = require('path');
 
 // PostCss
@@ -91,6 +92,7 @@ module.exports = {
         ]
     },
     plugins: [
+        new HardSourceWebpackPlugin(),
         new CleanWebpackPlugin(),
         new CopyWebpackPlugin([{
             from: path.resolve(__dirname, 'static'),
