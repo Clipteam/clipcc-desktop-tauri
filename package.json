@@ -10,6 +10,7 @@
   "license": "AGPL-3.0",
   "scripts": {
     "tauri": "tauri",
+    "dev": "tauri dev",
     "fetch": "node ./scripts/fetchMediaLibraryAssets.js"
   },
   "repository": {

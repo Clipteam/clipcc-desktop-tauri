@@ -16,6 +16,7 @@
       "targets": "all",
       "identifier": "com.codingclip.clipcc3",
       "icon": [
+        "icons/16x16.png",
         "icons/32x32.png",
         "icons/128x128.png",
         "icons/128x128@2x.png",
@@ -54,6 +55,9 @@
     "windows": [
       {
         "title": "ClipCC",
+        "decorations": true,
+        "transparent": false,
+        "focus": true,
         "width": 1024,
         "height": 640,
         "minWidth": 1024,

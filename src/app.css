@@ -10,3 +10,29 @@ body,
     min-width: 1024px;
     min-height: 640px; /* Min height to fit sprite/backdrop button */
 }
+
+/* @todo: move globally? Safe / side FX, for blocks particularly? */
+* { box-sizing: border-box; }
+
+::-webkit-scrollbar {
+    width: 18px;
+    height: 18px;
+    padding: 4px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-track {
+    padding: 4px;
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 9px;
+    background: rgba(190, 190, 190, 0.8);
+    background-clip: padding-box;
+    border: 6px solid transparent;
+}

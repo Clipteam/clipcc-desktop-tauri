@@ -10,6 +10,3 @@ body,
     min-width: 1024px;
     min-height: 640px; /* Min height to fit sprite/backdrop button */
 }
-
-/* @todo: move globally? Safe / side FX, for blocks particularly? */
-* { box-sizing: border-box; }
