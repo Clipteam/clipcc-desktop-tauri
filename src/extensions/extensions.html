@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google" value="notranslate">
+    <link rel="shortcut icon" href="static/favicon.ico">
+    <title>ClipCC</title>
+    <script defer data-domain="codingclip.com" src="https://analytic.codingclip.com/js/plausible.js"></script>
+    <!-- Sentry error logging to help with finding bugs -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@sentry/browser@6.17.3/build/bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script defer>
+        Sentry.init({
+            dsn: 'https://ed881d9f133e457d8cdca25202200c3f@o1098997.ingest.sentry.io/6123390',
+        });
+    </script>
+    <style>
+        body {
+            background: #ededed;
+        }
+        #extensions {
+            max-height: 100vh;
+            overflow: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 18px;
+            height: 18px;
+            padding: 4px;
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-track {
+            padding: 4px;
+            background-clip: padding-box;
+        }
+
+        ::-webkit-scrollbar-corner {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 9px;
+            background: rgba(190, 190, 190, 0.8);
+            background-clip: padding-box;
+            border: 6px solid transparent;
+        }
+    </style>
+    <script defer src="extensions.js"></script>
+    <!-- /Sentry -->
+</head>
+
+<body dir="ltr">
+    <div id="extensions"></div>
+</body>
+
+</html>

@@ -15,11 +15,15 @@ require('clipcc-gui/gen-meta');
 module.exports = {
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
     target: 'web',
-    entry: './src/index.jsx',
+    entry: {
+        index: './src/index.tsx',
+        extensions: './src/extensions/extensions.tsx'
+    },
     output: {
-        filename: 'index.js'
+        filename: '[name].js'
     },
     resolve: {
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
         symlinks: false
     },
     devServer: {
@@ -42,14 +46,16 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.tsx?$/,
+                loader: 'esbuild-loader',
+                options: {
+                    loader: 'tsx',
+                    // eslint-disable-next-line global-require
+                    tsconfigRaw: require('./tsconfig.json')
+                }
+            },
+            {
                 test: /\.jsx?$/,
-                include: [
-                    path.resolve(__dirname, 'src'),
-                    /node_modules[\\/]+scratch-[^\\/]+[\\/]+src/,
-                    /node_modules[\\/]+clipcc-[^\\/]+[\\/]+src/,
-                    /node_modules[\\/]+pify/,
-                    /node_modules[\\/]+@vernier[\\/]+godirect/
-                ],
                 loader: 'esbuild-loader',
                 options: {
                     loader: 'jsx'
@@ -99,6 +105,9 @@ module.exports = {
             to: './static'
         }, {
             from: path.resolve(__dirname, 'src', 'index.html'),
+            to: '.'
+        }, {
+            from: path.resolve(__dirname, 'src', 'extensions', 'extensions.html'),
             to: '.'
         }, {
             from: path.resolve(__dirname, 'src', 'index.css'),

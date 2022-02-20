@@ -6,9 +6,9 @@ import React from 'react';
  * @param {Component} WrappedComponent - an AppStateHOC-like component to wrap.
  * @returns {Component} - a component similar to AppStateHOC with desktop-specific logic added.
  */
-const ScratchDesktopAppStateHOC = function (WrappedComponent) {
-    class ScratchDesktopAppStateComponent extends React.Component {
-        constructor (props) {
+const ScratchDesktopAppStateHOC = function (WrappedComponent: typeof React.Component) {
+    class ScratchDesktopAppStateComponent extends React.Component<{}, {telemetryDidOptIn:boolean}> {
+        constructor (props: any) {
             super(props);
             bindAll(this, [
                 'handleTelemetryModalOptIn',

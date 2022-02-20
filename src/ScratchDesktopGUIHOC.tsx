@@ -1,10 +1,10 @@
 import bindAll from 'lodash.bindall';
 import omit from 'lodash.omit';
-import PropTypes from 'prop-types';
-import React from 'react';
+import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {loadExtensionFromFile} from 'clipcc-gui/src';
 import TauriStorageHelper from './TauriStorageHelper';
+import React from 'react';
 
 import {
     LoadingStates,
@@ -21,20 +21,18 @@ import {
     openTelemetryModal
 } from 'clipcc-gui/src/reducers/modals';
 
-function showPrivacyPolicy() {}
-
-async function getInitialProjectData() {
-
-}
+const getInitialProjectData = (): Promise<any> => Promise.resolve();
+const showPrivacyPolicy = (): Promise<any> => Promise.resolve();
 
 /**
  * Higher-order component to add desktop logic to the GUI.
  * @param {Component} WrappedComponent - a GUI-like component to wrap.
  * @returns {Component} - a component similar to GUI with desktop-specific logic added.
  */
-const ScratchDesktopGUIHOC = function (WrappedComponent) {
-    class ScratchDesktopGUIComponent extends React.Component {
-        constructor (props) {
+const ScratchDesktopGUIHOC = function (WrappedComponent: typeof React.Component): any {
+    class ScratchDesktopGUIComponent extends React.Component<any> {
+        static propTypes: {};
+        constructor (props: any) {
             super(props);
             bindAll(this, [
                 'handleProjectTelemetryEvent',
@@ -45,7 +43,7 @@ const ScratchDesktopGUIHOC = function (WrappedComponent) {
                 'handleUpdateProjectTitle'
             ]);
             this.props.onLoadingStarted();
-            
+
             getInitialProjectData().then(initialProjectData => {
                 const hasInitialProject = initialProjectData && (initialProjectData.length > 0);
                 this.props.onHasInitialProject(hasInitialProject, this.props.loadingState);
@@ -58,10 +56,10 @@ const ScratchDesktopGUIHOC = function (WrappedComponent) {
                         this.props.onLoadingCompleted();
                         this.props.onLoadedProject(this.props.loadingState, true);
                     },
-                    e => {
+                    (e: { message: any; }) => {
                         this.props.onLoadingCompleted();
                         this.props.onLoadedProject(this.props.loadingState, false);
-                        alert({
+                        (alert as any as Function)({
                             type: 'error',
                             title: 'Failed to load project',
                             message: 'Invalid or corrupt project file.',
@@ -103,22 +101,23 @@ const ScratchDesktopGUIHOC = function (WrappedComponent) {
         handleClickAbout () {
             // ipcRenderer.send('open-about-window');
         }
-        handleProjectTelemetryEvent (event, metadata) {
+        handleProjectTelemetryEvent () {
             // ipcRenderer.send(event, metadata);
         }
-        handleSetTitleFromSave (event, args) {
+        handleSetTitleFromSave (_event: any, args: { title: any; }) {
             this.handleUpdateProjectTitle(args.title);
         }
-        handleLoadExtension (event, args) {
+        handleLoadExtension (_event: any, args: { extension: any; }) {
             this.props.loadExtensionFromFile(args.extension, 'ccx');
         }
         handleGetExtension () {
             // ipcRenderer.invoke('set-extension', this.props.extension);
         }
-        handleStorageInit (storageInstance) {
+        // eslint-disable-next-line no-unused-vars
+        handleStorageInit (storageInstance: { addHelper: (arg0: TauriStorageHelper) => void; }) {
             storageInstance.addHelper(new TauriStorageHelper(storageInstance));
         }
-        handleUpdateProjectTitle (newTitle) {
+        handleUpdateProjectTitle (newTitle: any) {
             this.setState({projectTitle: newTitle});
         }
         render () {
@@ -181,7 +180,7 @@ const ScratchDesktopGUIHOC = function (WrappedComponent) {
         // vm: GUIComponent.WrappedComponent.propTypes.vm
         vm: PropTypes.shape({})
     };
-    const mapStateToProps = state => {
+    const mapStateToProps = (state: any) => {
         const loadingState = state.scratchGui.projectState.loadingState;
         return {
             loadingState: loadingState,
@@ -189,10 +188,10 @@ const ScratchDesktopGUIHOC = function (WrappedComponent) {
             extension: state.scratchGui.extension.extension
         };
     };
-    const mapDispatchToProps = dispatch => ({
+    const mapDispatchToProps = (dispatch: any) => ({
         onLoadingStarted: () => dispatch(openLoadingProject()),
         onLoadingCompleted: () => dispatch(closeLoadingProject()),
-        onHasInitialProject: (hasInitialProject, loadingState) => {
+        onHasInitialProject: (hasInitialProject: any, loadingState: any) => {
             if (hasInitialProject) {
                 // emulate sb-file-uploader
                 return dispatch(requestProjectUpload(loadingState));
@@ -202,15 +201,15 @@ const ScratchDesktopGUIHOC = function (WrappedComponent) {
             // setting the default project ID is a valid transition from NOT_LOADED and acts like "create new"
             return dispatch(setProjectId(defaultProjectId));
         },
-        onFetchedInitialProjectData: (projectData, loadingState) =>
+        onFetchedInitialProjectData: (projectData: any, loadingState: any) =>
             dispatch(onFetchedProjectData(projectData, loadingState)),
-        onLoadedProject: (loadingState, loadSuccess) => {
+        onLoadedProject: (loadingState: any, loadSuccess: any) => {
             const canSaveToServer = false;
             return dispatch(onLoadedProject(loadingState, canSaveToServer, loadSuccess));
         },
         onRequestNewProject: () => dispatch(requestNewProject(false)),
         onTelemetrySettingsClicked: () => dispatch(openTelemetryModal()),
-        loadExtensionFromFile: (file, type) => loadExtensionFromFile(dispatch, file, type)
+        loadExtensionFromFile: (file: any, type: any) => loadExtensionFromFile(dispatch, file, type)
     });
 
     return connect(mapStateToProps, mapDispatchToProps)(ScratchDesktopGUIComponent);

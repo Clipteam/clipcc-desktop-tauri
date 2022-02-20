@@ -6,7 +6,8 @@ import * as path from 'path';
  * Allow the storage module to load files bundled in the Electron application.
  */
 class ElectronStorageHelper {
-    constructor (storageInstance) {
+    parent: any;
+    constructor (storageInstance: any) {
         this.parent = storageInstance;
     }
 
@@ -17,7 +18,7 @@ class ElectronStorageHelper {
      * @param {DataFormat} dataFormat - The file format / file extension of the asset to fetch: PNG, JPG, etc.
      * @return {Promise.<Asset>} A promise for the contents of the asset.
      */
-    async load (assetType, assetId, dataFormat) {
+    async load (assetType: any, assetId: string, dataFormat: string) {
         assetId = path.basename(assetId);
         dataFormat = path.basename(dataFormat);
         const data = await readBinaryFile(`assets/${assetId}.${dataFormat}`, {
@@ -27,7 +28,7 @@ class ElectronStorageHelper {
         return new this.parent.Asset(assetType, assetId, dataFormat, bytes);
     }
 
-    static async loadAsBase64 (assetId, dataFormat) {
+    static async loadAsBase64 (assetId: string, dataFormat: string) {
         assetId = path.basename(assetId);
         dataFormat = path.basename(dataFormat);
         const data = await readBinaryFile(`assets/${assetId}.${dataFormat}`, {
@@ -58,20 +59,19 @@ class ElectronStorageHelper {
             break;
         default:
         }
-        console.log(assetId, dataFormat, mime);
         return URL.createObjectURL(new Blob([new Uint8Array(data)], {type: mime}));
     }
 }
 
 // We assume that assets are static
 const cache = new Map();
-window.onAssetPreview = async assetId => {
+(window as any).onAssetPreview = async (assetId: string) => {
     if (cache.has(assetId)) {
         return cache.get(assetId);
     }
-    const data = await ElectronStorageHelper.loadAsBase64(...assetId.split('.'));
+    const [splitedAssetId, dataFormat] = assetId.split('.');
+    const data = await ElectronStorageHelper.loadAsBase64(splitedAssetId, dataFormat);
     cache.set(assetId, data);
-    console.log(assetId, data);
     return data;
 };
 

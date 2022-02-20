@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.header {
+    display: flex;
+    background-color: #3d8cf3;
+    color: white;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 1rem;
+    font-size: 0.875rem;
+    height: calc(2.5rem + 2rem);
+}
+.search {
+    margin-right: .75rem;
+    flex-grow: 0;
+}
+.search-input {
+    width: 11.5rem;
+    transition: .2s;
+}
+.extension-list {
+    max-height: calc(100vh - 4.5rem);
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 1rem 1rem;
+}

@@ -1,0 +1,43 @@
+.plugin-card {
+    border: 1px solid #ddd;
+    background-color: #FFF;
+    border-radius: 8px;
+    margin-bottom: 1.5em;
+    padding: 1em;
+    margin: 1rem;
+    width: 20rem;
+    height: 15rem;
+    color: hsla(225, 15%, 40%, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.buttons {
+    flex-grow: 1;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+}
+
+.buttons > button {
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background: #3d8cf3;
+    color: #FFF;
+    padding: .625rem 1rem;
+    border-radius: 1.375rem;
+    height: 2.5rem;
+    font-size: .875rem;
+}
+
+.buttons > button.installed {
+    background: #AAAAAA;
+    color: #FFF;
+    cursor: not-allowed;
+}

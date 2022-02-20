@@ -1,7 +1,17 @@
 module.exports = {
     root: true,
+    parser: '@typescript-eslint/parser',
+    plugins: ['@typescript-eslint'],
     env: {
-        web: true
+        browser: true
     },
-    extends: ['scratch', 'scratch/es6', 'scratch/node']
+    rules: {
+        'no-use-before-define': 'off',
+        '@typescript-eslint/no-use-before-define': ['error']
+    },
+    extends: [
+        'scratch',
+        'scratch/es6',
+        'scratch/node'
+    ]
 };
