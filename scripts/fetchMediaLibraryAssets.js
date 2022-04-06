@@ -97,14 +97,20 @@ const connectionPool = [];
 
 const fetchAsset = function (md5, callback) {
     (async () => {
+        const savePath = path.resolve(OUT_PATH, md5);
+        if (fs.existsSync(savePath)) {
+            console.log(`Skipping ${md5} (already exists).`);
+            return callback();
+        }
         const urlHuman = ASSET_URL_FORMAT.replace('[ASSET_HOST]', ASSET_HOST).replace('[MD5]', md5);
-        const result = await axios.get(urlHuman, {
+        /** @type {import("http").IncomingMessage} */
+        const result = (await axios.get(urlHuman, {
             responseType: 'stream'
-        });
-        const stream = fs.createWriteStream(path.resolve(OUT_PATH, md5), {encoding: 'binary'});
+        })).data;
+        const stream = fs.createWriteStream(savePath, {encoding: 'binary'});
         stream.on('error', callback || console.error);
-        result.data.pipe(stream);
-        result.data.on('end', () => {
+        result.pipe(stream);
+        result.on('end', () => {
             stream.end();
             console.log(`Fetched ${urlHuman}`);
             if (callback) callback();
