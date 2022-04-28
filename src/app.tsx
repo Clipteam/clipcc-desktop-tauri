@@ -1,6 +1,8 @@
 import {compose} from 'redux';
 
-import GUI, {setAppElement, AppStateHOC} from 'clipcc-gui/src';
+import {setAppElement} from 'clipcc-gui/src';
+import GUI from 'clipcc-gui/src/index';
+import AppStateHOC from 'clipcc-gui/src/lib/app-state-hoc.jsx';
 
 import ScratchDesktopAppStateHOC from './ScratchDesktopAppStateHOC';
 import ScratchDesktopGUIHOC from './ScratchDesktopGUIHOC';

@@ -2,7 +2,7 @@ import bindAll from 'lodash.bindall';
 import omit from 'lodash.omit';
 import * as PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {loadExtensionFromFile} from 'clipcc-gui/src';
+import {loadExtensionFromFile} from 'clipcc-gui/src/index';
 import TauriStorageHelper from './TauriStorageHelper';
 import React from 'react';
 
