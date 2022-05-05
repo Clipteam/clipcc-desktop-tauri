@@ -1,10 +1,16 @@
-declare module 'clipcc-gui/src' {
+declare module 'clipcc-gui/src/index' {
     import * as React from 'react';
     // eslint-disable-next-line no-unused-vars
     export const loadExtensionFromFile: (dispatch: any, file: string, type: string) => Promise<void>;
     export const AppStateHOC: any;
     export const initExtension: any;
     export const setAppElement: any;
+    const GUI: typeof React.Component;
+    export default GUI;
+}
+declare module 'clipcc-gui/src/lib/app-state-hoc.jsx' {
+    // eslint-disable-next-line no-duplicate-imports
+    import * as React from 'react';
     const GUI: typeof React.Component;
     export default GUI;
 }

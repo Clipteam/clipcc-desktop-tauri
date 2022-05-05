@@ -1,7 +1,7 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const path = require('path');
+const { ESBuildMinifyPlugin } = require('esbuild-loader');
 
 // PostCss
 const postcssVars = require('postcss-simple-vars');
@@ -12,6 +12,7 @@ const getModulePath = moduleName => path.dirname(require.resolve(`${moduleName}/
 // Generate metafile
 require('clipcc-gui/gen-meta');
 
+/** @type {import('webpack').Configuration} */
 module.exports = {
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
     target: 'web',
@@ -26,6 +27,7 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
         symlinks: false
     },
+    devtool: 'eval-source-map',
     devServer: {
         static: [
             {
@@ -42,6 +44,13 @@ module.exports = {
             }
         ],
         compress: true
+    },
+    optimization: {
+        minimizer: [
+            new ESBuildMinifyPlugin({
+                target: 'esnext'
+            })
+        ]
     },
     module: {
         rules: [
@@ -98,7 +107,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new HardSourceWebpackPlugin(),
         new CleanWebpackPlugin(),
         new CopyWebpackPlugin([{
             from: path.resolve(__dirname, 'static'),

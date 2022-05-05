@@ -11,7 +11,8 @@
   "scripts": {
     "tauri": "tauri",
     "dev": "tauri dev",
-    "fetch": "node ./scripts/fetchMediaLibraryAssets.js"
+    "fetch": "node ./scripts/fetchMediaLibraryAssets.js",
+    "postinstall": "node ./scripts/patch-gui.js"
   },
   "repository": {
     "type": "git",
@@ -24,10 +25,10 @@
     "@babel/plugin-transform-async-to-generator": "^7.8.3",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
-    "@tauri-apps/cli": "^1.0.0-rc.8",
+    "@tauri-apps/cli": "^1.0.0-rc.9",
     "@types/lodash.bindall": "^4.4.6",
     "@types/lodash.omit": "^4.5.6",
-    "@types/react-redux": "^7.1.22",
+    "@types/react-redux": "^7.1.24",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
     "axios": "^0.25.0",
@@ -45,21 +46,22 @@
     "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-react": "^7.28.0",
     "file-loader": "^6.2.0",
-    "hard-source-webpack-plugin": "^0.13.1",
     "lodash.omit": "^4.5.0",
     "postcss-import": "12.0.0",
     "postcss-loader": "3.0.0",
     "postcss-simple-vars": "5.0.1",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0"
+  },
+  "resolutions": {
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-redux": "7.2.6",
-    "redux": "4.1.2",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.4"
+    "redux": "4.1.2"
   },
   "dependencies": {
-    "@tauri-apps/api": "^1.0.0-rc.3",
+    "@tauri-apps/api": "^1.0.0-rc.4",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
     "clipcc-gui": "git+https://github.com/Clipteam/clipcc-gui.git#3.1.12"

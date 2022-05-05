@@ -1,14 +1,13 @@
 {
   "package": {
     "productName": "ClipCC Desktop Tauri",
-    "version": "3.1.2-beta1"
+    "version": "3.1.12.0"
   },
   "build": {
     "distDir": "../dist",
     "devPath": "http://localhost:8080/index.html",
     "beforeDevCommand": "yarn webpack serve",
-    "beforeBuildCommand": "yarn webpack --mode=production --progress",
-    "withGlobalTauri": true
+    "beforeBuildCommand": "yarn webpack --mode=production --progress"
   },
   "tauri": {
     "bundle": {
@@ -32,13 +31,11 @@
       "shortDescription": "",
       "longDescription": "",
       "deb": {
-        "depends": [],
-        "useBootstrapper": false
+        "depends": []
       },
       "macOS": {
         "frameworks": [],
         "minimumSystemVersion": "",
-        "useBootstrapper": false,
         "exceptionDomain": "",
         "signingIdentity": null,
         "entitlements": null
@@ -46,7 +43,13 @@
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
-        "timestampUrl": ""
+        "timestampUrl": "",
+        "wix": {
+          "language": "zh-CN",
+          "bannerPath": "wix-assets/banner.png",
+          "dialogImagePath": "wix-assets/dialog.png",
+          "license": "../LICENSE"
+        }
       }
     },
     "updater": {
