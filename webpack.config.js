@@ -1,7 +1,7 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const path = require('path');
-const {ESBuildMinifyPlugin} = require('esbuild-loader');
+const fs = require('fs');
 
 // PostCss
 const postcssVars = require('postcss-simple-vars');
@@ -11,6 +11,27 @@ const getModulePath = moduleName => path.dirname(require.resolve(`${moduleName}/
 
 // Generate metafile
 require('clipcc-gui/gen-meta');
+
+class CleanSourceMapWebpackPlugin {
+    /**
+     * @param {import('webpack').Compiler} compiler the compiler instance
+     */
+    apply (compiler) {
+        compiler.hooks.done.tapAsync('CleanSourceMapWebpackPlugin', async ({compilation}) => {
+            // if (process.env.NODE_ENV !== 'production') return;
+            const outputPath = compilation.outputOptions.path;
+            if (!outputPath) return;
+            const threads = [];
+            Object.keys(compilation.assets)
+                .filter(filename => /[a-zA-Z0-9]\.(js|css)\.map$/.test(filename))
+                .forEach(filename => {
+                    const filePath = path.resolve(outputPath, filename);
+                    threads.push(fs.promises.unlink(filePath));
+                });
+            await Promise.all(threads);
+        });
+    }
+}
 
 /** @type {import('webpack').Configuration} */
 module.exports = {
@@ -27,7 +48,7 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
         symlinks: false
     },
-    devtool: 'source-map',
+    devtool: process.env.NODE_ENV === 'production' ? undefined : 'source-map',
     devServer: {
         static: [
             {
@@ -45,11 +66,6 @@ module.exports = {
         ],
         compress: true
     },
-    // optimization: {
-    //     minimizer: [
-    //         new ESBuildMinifyPlugin()
-    //     ]
-    // },
     module: {
         rules: [
             {
@@ -124,6 +140,7 @@ module.exports = {
         }, {
             from: path.resolve(getModulePath('clipcc-gui'), 'static'),
             to: './static'
-        }])
+        }]),
+        new CleanSourceMapWebpackPlugin()
     ]
 };

@@ -14,6 +14,9 @@
     "bundle": {
       "active": true,
       "targets": "all",
+      "resources": [
+        "./assets"
+      ],
       "identifier": "com.codingclip.clipcc3",
       "icon": [
         "icons/16x16.png",
