@@ -7,6 +7,10 @@
     <meta name="google" value="notranslate">
     <link rel="shortcut icon" href="static/favicon.ico">
     <title>ClipCC</title>
+    <script>
+        console.log(window.__TAURI_IPC__)
+    </script>
+    <script defer src="index.js"></script>
     <script defer data-domain="codingclip.com" src="https://analytic.codingclip.com/js/plausible.js"></script>
     <!-- Sentry error logging to help with finding bugs -->
     <script defer src="https://cdn.jsdelivr.net/npm/@sentry/browser@6.17.3/build/bundle.min.js" crossorigin="anonymous"></script>
@@ -15,7 +19,6 @@
             dsn: 'https://ed881d9f133e457d8cdca25202200c3f@o1098997.ingest.sentry.io/6123390',
         });
     </script>
-    <script defer src="index.js"></script>
     <!-- /Sentry -->
 </head>
 

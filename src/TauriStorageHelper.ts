@@ -1,5 +1,5 @@
-import {readBinaryFile} from '@tauri-apps/api/fs';
-import {BaseDirectory} from '@tauri-apps/api/path';
+import * as tauriFS from '@tauri-apps/api/fs';
+import * as tauriPath from '@tauri-apps/api/path';
 import * as path from 'path';
 
 /**
@@ -18,11 +18,11 @@ class ElectronStorageHelper {
      * @param {DataFormat} dataFormat - The file format / file extension of the asset to fetch: PNG, JPG, etc.
      * @return {Promise.<Asset>} A promise for the contents of the asset.
      */
-    async load (assetType: any, assetId: string, dataFormat: string) {
+    async load (assetType: any, assetId: string, dataFormat: string): Promise<any> {
         assetId = path.basename(assetId);
         dataFormat = path.basename(dataFormat);
-        const data = await readBinaryFile(`assets/${assetId}.${dataFormat}`, {
-            dir: BaseDirectory.Resource
+        const data = await tauriFS.readBinaryFile(`assets/${assetId}.${dataFormat}`, {
+            dir: tauriPath.BaseDirectory.Resource
         });
         const bytes = new Uint8Array(data);
         return new this.parent.Asset(assetType, assetId, dataFormat, bytes);
@@ -31,8 +31,8 @@ class ElectronStorageHelper {
     static async loadAsBase64 (assetId: string, dataFormat: string) {
         assetId = path.basename(assetId);
         dataFormat = path.basename(dataFormat);
-        const data = await readBinaryFile(`assets/${assetId}.${dataFormat}`, {
-            dir: BaseDirectory.Resource
+        const data = await tauriFS.readBinaryFile(`assets/${assetId}.${dataFormat}`, {
+            dir: tauriPath.BaseDirectory.Resource
         });
         let mime = '';
         switch (dataFormat) {

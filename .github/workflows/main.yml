@@ -23,15 +23,27 @@ jobs:
       if: matrix.platform == 'ubuntu-latest'
       run: |
         sudo apt-get update
-        sudo apt-get install -y webkit2gtk-4.0
+        sudo apt-get install -y libgtk-3-dev webkit2gtk-4.0 libappindicator3-dev librsvg2-dev patchelf
     - name: install app dependencies, download static assets and build it
       run: yarn && yarn fetch
-    - uses: tauri-apps/tauri-action@v0
+    - uses: tauri-apps/tauri-action@v0 # For Non-Windows
+      if: matrix.platform != 'windows-latest'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tagName: nightly # the action automatically replaces \_\_VERSION\_\_ with the app version
         releaseName: "ClipCC Desktop Tauri Nightly Build"
         releaseBody: "You can download the build to test."
+        releaseDraft: false
+        prerelease: true
+    - uses: tauri-apps/tauri-action@v0 # For Windows
+      if: matrix.platform == 'windows-latest'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tagName: nightly # the action automatically replaces \_\_VERSION\_\_ with the app version
+        releaseName: "ClipCC Desktop Tauri Nightly Build"
+        releaseBody: "You can download the build to test."
+        tauriScript: yarn tauri build --target i686-pc-windows-msvc
         releaseDraft: false
         prerelease: true

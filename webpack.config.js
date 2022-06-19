@@ -1,7 +1,7 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const path = require('path');
-const { ESBuildMinifyPlugin } = require('esbuild-loader');
+const {ESBuildMinifyPlugin} = require('esbuild-loader');
 
 // PostCss
 const postcssVars = require('postcss-simple-vars');
@@ -27,7 +27,7 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
         symlinks: false
     },
-    devtool: 'eval-source-map',
+    devtool: 'source-map',
     devServer: {
         static: [
             {
@@ -45,13 +45,11 @@ module.exports = {
         ],
         compress: true
     },
-    optimization: {
-        minimizer: [
-            new ESBuildMinifyPlugin({
-                target: 'esnext'
-            })
-        ]
-    },
+    // optimization: {
+    //     minimizer: [
+    //         new ESBuildMinifyPlugin()
+    //     ]
+    // },
     module: {
         rules: [
             {

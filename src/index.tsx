@@ -13,16 +13,20 @@ tauri.window.appWindow.listen('tauri://close-requested', () => {
 });
 
 (window as any).ClipCC = {
+    versions: {
+        node: 'NO NODE',
+        electron: 'IS TAURI',
+        chrome: navigator.userAgent.indexOf('Chrome') > -1 ? navigator.userAgent.match(/Chrome\/([0-9.]+)\W/)[1] : ''
+    },
     ipc: {
         async send (typeName: any) {
             switch (typeName) {
             case 'open-extension-store':
             {
-                for (const win of tauri.window.getAll()) {
-                    if (win.label === 'extension-store') {
-                        await win.setFocus();
-                        return;
-                    }
+                const win = tauri.window.WebviewWindow.getByLabel('extension-store');
+                if (win) {
+                    await win.setFocus();
+                    return;
                 }
                 const newUri = new URL(location.href);
                 newUri.pathname = newUri.pathname.replace(/\/[^/]+$/, '/extensions.html');
