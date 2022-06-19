@@ -6,7 +6,7 @@
     "name": "Clip Team",
     "email": "cuizhihui030925@outlook.com"
   },
-  "version": "3.1.2-beta3",
+  "version": "3.1.2",
   "license": "AGPL-3.0",
   "scripts": {
     "tauri": "tauri",
@@ -38,7 +38,7 @@
     "babel-plugin-react-intl": "^7.5.7",
     "classnames": "^2.3.1",
     "clean-webpack-plugin": "^4.0.0",
-    "clipcc-extension": "^0.1.7",
+    "clipcc-extension": "^0.1.9",
     "copy-webpack-plugin": "^5.1.2",
     "css-loader": "1.0.0",
     "esbuild-loader": "^2.18.0",
@@ -65,6 +65,6 @@
     "@tauri-apps/api": "^1.0.0-rc.4",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
-    "clipcc-gui": "git+https://github.com/Clipteam/clipcc-gui.git#3.1.12"
+    "clipcc-gui": "git+https://github.com/Clipteam/clipcc-gui.git#3.1.13"
   }
 }
